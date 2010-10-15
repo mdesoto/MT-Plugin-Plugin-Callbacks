@@ -10,6 +10,8 @@ sub init_app {
     *MT::Plugin::save_config = \&save_config;
 }
 
+# This function is identical to MT::Plugin::save_config, except 
+# that I've added pc_pre_save and pc_post_save calllbacks.
 sub save_config {
     my $plugin = shift;
     my ($param, $scope) = @_;
@@ -22,12 +24,13 @@ sub save_config {
     }
     $pdata->data($data);
     MT->request('plugin_config.'.$plugin->id, undef);
-    
-    MT->run_callbacks('pc_pre_save_config', $param, $scope);
-    
+
+    # Not sure
+    MT->run_callbacks('pc_pre_save', $param, $scope, $pdata);
+
     $pdata->save() or die $pdata->errstr;
-    
-    MT->run_callbacks('pc_post_save_config', $param, $scope);
+
+    MT->run_callbacks('pc_post_save', $param, $scope, $pdata);
 }
 
 1;
