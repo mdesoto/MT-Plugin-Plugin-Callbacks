@@ -1,0 +1,13 @@
+id: PluginCallbacks
+name: Plugin Callbacks
+description: Movable Type exposes a number of different callbacks that developers can hook their code to. Missing, however, are callbacks triggered by events occurring to plugins themselves. This plugin adds those callbacks..
+version: 0.01
+author_name: Michael De Soto
+author_link: http://www.quarg.com/
+plugin_link: http://www.quarg.com/
+blog_config_template: config.tmpl
+
+callbacks:
+    init_app: $PluginCallbacks::PluginCallbacks::Plugin::init_app
+    PluginCallbacks::Plugin::pc_pre_save_config: $PluginCallbacks::PluginCallbacks::Plugin::pre_save_config
+    PluginCallbacks::Plugin::pc_post_save_config: $PluginCallbacks::PluginCallbacks::Plugin::post_save_config
