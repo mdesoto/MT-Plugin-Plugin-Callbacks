@@ -1,7 +1,7 @@
 id: PluginCallbacks
 name: Plugin Callbacks
 description: Movable Type exposes a number of different callbacks that developers can hook their code to. Missing, however, are callbacks triggered by events occurring to plugins themselves. This plugin adds those callbacks..
-version: 0.01
+version: 0.03
 author_name: Michael De Soto
 author_link: http://www.quarg.com/
 plugin_link: http://www.quarg.com/

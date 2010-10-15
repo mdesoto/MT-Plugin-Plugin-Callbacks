@@ -25,7 +25,6 @@ sub save_config {
     $pdata->data($data);
     MT->request('plugin_config.'.$plugin->id, undef);
 
-    # Not sure
     MT->run_callbacks('pc_pre_save', $param, $scope, $pdata);
 
     $pdata->save() or die $pdata->errstr;

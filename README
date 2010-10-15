@@ -1,0 +1,25 @@
+## Overview
+
+Movable Type exposes a number of different callbacks that developers can hook their code to. Missing, however, are callbacks triggered by events occurring to plugins themselves. This plugin adds those callbacks.
+
+Currently the only callbacks are pre/post_save events. They are triggered just before and just after a plugin saves the settings to the database.
+
+Other callbacks can be added as requested.
+
+
+## How to Use
+
+Add these lines to the callbacks section of your plugin's config.yaml file:
+
+callbacks:
+    pc_pre_save: $Example::Example::Plugin::pre_save
+    pc_post_save: $Example::Example::Plugin::post_save
+
+
+Then consume the callbacks like so:
+
+sub pre_save {
+    my ($cb, $param, $scope, $pdata) = @_;
+
+    # Do your thing.
+}
