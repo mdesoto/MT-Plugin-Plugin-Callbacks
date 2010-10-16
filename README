@@ -1,25 +1,56 @@
 ## Overview
 
-Movable Type exposes a number of different callbacks that developers can hook their code to. Missing, however, are callbacks triggered by events occurring to plugins themselves. This plugin adds those callbacks.
+Movable Type exposes a number of different callbacks that developers can hook 
+their code to. But sometimes you want a little extra mustard. Sometimes you
+just need a callback in a certain place. This plugin demonstrates how to do
+exactly that.
 
-Currently the only callbacks are pre/post_save events. They are triggered just before and just after a plugin saves the settings to the database.
-
-Other callbacks can be added as requested.
+Whether you should is not a topic I'm going to cover here. Just be aware that
+there are very good reasons not to do this, and that there are other ways of
+accomplishing the same thing.
 
 
 ## How to Use
 
-Add these lines to the callbacks section of your plugin's config.yaml file:
+Other plugins can consume your custom callbacks by doing something like this
+in their config.yaml file:
 
 callbacks:
     pc_pre_save: $Example::Example::Plugin::pre_save
     pc_post_save: $Example::Example::Plugin::post_save
 
 
-Then consume the callbacks like so:
+And then they consume the callbacks like so:
 
 sub pre_save {
     my ($cb, $param, $scope, $pdata) = @_;
 
     # Do your thing.
 }
+
+This process should already be familiar to developers. The real magic occurs 
+in the overriding of MT's core methods as demonstrated in this plugin's 
+Plugin.pm file.
+
+
+## A Note
+
+You should not use this plugin as is. The specific callbacks demonstrated by 
+this plugin are already built into the core MT:Object system and so this code
+should serve only as an example of what you *can* do. If you need to use the 
+pre/post_save callback on a plugin you *should* use:
+
+callbacks:
+    MT::PluginData::pre_save: $Example::Example::Plugin::pre_save
+    MT::PluginData::post_save: $Example::Example::Plugin::post_save
+
+
+## Acknowledgements
+
+I'd like to give a special thanks to the following people for paricipating in
+the discussion that led to this plugin:
+
+    Steve Cook
+    Byrne Reese
+    Mike Thomsen
+    Dan Wolfgang
